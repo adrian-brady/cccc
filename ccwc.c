@@ -51,7 +51,7 @@ long word_count(char *fname) {
   }
 
   int c;
-  bool previous_char_whitespace = false;
+  bool previous_char_whitespace = true;
   while ((c = getc(fp)) != EOF) {
     if (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
       if (!previous_char_whitespace) {
@@ -62,6 +62,12 @@ long word_count(char *fname) {
       previous_char_whitespace = false;
     }
   }
+
+  if (!previous_char_whitespace) {
+    count++; // Count last word if the file does not end with whitespace
+  }
+
+  fclose(fp);
 
   return count;
 }
