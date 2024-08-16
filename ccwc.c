@@ -83,7 +83,8 @@ long char_count(char *fname) {
 
   int c;
   while ((c = getc(fp)) != EOF) {
-    count++;
+    if (!(c == '\n' || c == ' ' || c == '\t' || c == '\r'))
+      count++;
   }
 
   fclose(fp);
